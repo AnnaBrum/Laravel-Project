@@ -14,6 +14,6 @@
     <button type="submit">Login</button>
 </form>
 
-
 @include('errors')
 
+<a href="register">Register as new user</a>
