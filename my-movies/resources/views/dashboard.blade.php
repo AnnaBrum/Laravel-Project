@@ -4,10 +4,10 @@
     @csrf
 
     <label for="movieTitle">Title:</label>
-    <input type="text" name="movieTitle" id="movieTitle">
+    <input type="text" name="movie_title" id="movieTitle">
 
-    <label for="movieTitle">Genre:</label>
-    <select id="genre" name="genreList" form="movieForm">
+    <label for="movieGenre">Genre:</label>
+    <select id="genre" name="movie_genre" form="movieForm">
         <option value="comedy">Comedy</option>
         <option value="drama">Drama</option>
         <option value="thriller">Thriller</option>
@@ -16,7 +16,9 @@
     </select>
 
     <label for="moviePlot">Plot:</label>
-    <textarea type="text" name="moviePlot" id="moviePlot" rows="20" cols="50"></textarea>
+    <textarea type="text" name="movie_plot" id="moviePlot" rows="20" cols="50"></textarea>
 
     <button type="submit">Submit</button>
+
+    @include("errors")
 </form>
