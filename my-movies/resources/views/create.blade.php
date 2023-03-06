@@ -14,3 +14,5 @@
 
     @include("errors")
 </form>
+
+<a href="/">Back</a>

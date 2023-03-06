@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("movie_title");
             $table->string("movie_genre");
             $table->text("movie_plot");
-            $table->integer("movie_likes");
+            $table->integer("movie_likes")->default(0);
             $table->integer("user_id");
             $table->timestamps();
         });

@@ -1,3 +1,9 @@
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+@if (isset($user))
+<p>Signed in user: {{ $user->name }}</p>
+@endif
+
 <a href="logout">Log out</a>
 
 <form action="createMovie" method="post" id="movieForm">
@@ -22,3 +28,20 @@
 
     @include("errors")
 </form>
+
+
+
+
+@foreach ($movies as $movie)
+<div class="movieBox">
+    <h2>Movie Title: {{ucfirst($movie->movie_title)}}</h2>
+    <p>Genre: {{ucfirst($movie->movie_genre)}}</p>
+    <p>Plot: {{$movie->movie_plot}}</p>
+    <p>User Id: {{$movie->user_id}}</p>
+    <p>Number of Likes: {{$movie->movie_likes}}</p>
+    <form action="like" method="post">
+    <button type="submit"><img src="{{ asset('images/ThumbsUp.svg') }}" alt="thumbs up"></button>
+    </form>
+</div>
+
+@endforeach
