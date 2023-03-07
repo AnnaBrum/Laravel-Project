@@ -38,6 +38,17 @@
     @include("errors")
 </form>
 
+<form action="selectOnGenre" method="get" id="selectGenre">
+<label for="selectMovieGenre">Show all movies with genre: </label><br>
+    <select id="genre" name="movie_genre" form="selectOnGenre">
+        <option value="comedy">Comedy</option>
+        <option value="drama">Drama</option>
+        <option value="thriller">Thriller</option>
+        <option value="action">Action</option>
+        <option value="horror">Horror</option>
+    </select>
+</form>
+
 @if (isset($movies))
     @foreach ($movies as $movie)
         <div class="movieBox">
