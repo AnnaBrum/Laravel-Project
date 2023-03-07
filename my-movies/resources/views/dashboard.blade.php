@@ -38,16 +38,23 @@
     @include("errors")
 </form>
 
-<form action="selectOnGenre" method="get" id="selectGenre">
-<label for="selectMovieGenre">Show all movies with genre: </label><br>
-    <select id="genre" name="movie_genre" form="selectOnGenre">
+@foreach ($movies as $movie)
+<form action="{{ route('movie_genre', ['movie_genre' => $movie->movie_genre]) }}" method="post" id="movie_genre">
+@endforeach
+@csrf
+<label for="movie_genre">Show all movies from genre: </label><br>
+    <select id="movie_genre" name="movie_genre" form="movie_genre">
+        <option value="comedy">All</option>
         <option value="comedy">Comedy</option>
         <option value="drama">Drama</option>
         <option value="thriller">Thriller</option>
         <option value="action">Action</option>
         <option value="horror">Horror</option>
     </select>
+    <button type="submit">Show movies</button>
 </form>
+
+
 
 @if (isset($movies))
     @foreach ($movies as $movie)
@@ -58,7 +65,7 @@
             <p>User Id: {{$movie->user_id}}</p>
             <p>Number of Likes: {{$movie->movie_likes}}</p>
 
-            <form action="{{ route("like", ["id" => $movie->id]) }}" method="post">
+            <form action="{{ route('like', ['id' => $movie->id]) }}" method="post">
                 @csrf
                 <button type="submit"><img src="{{ asset('images/ThumbsUp.svg') }}" alt="thumbs up"></button>
             </form>

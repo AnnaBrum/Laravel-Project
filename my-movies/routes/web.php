@@ -6,6 +6,8 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\FilterController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,3 +37,6 @@ Route::get("register", [RegisterController::class, "create"]);
 Route::post("register", [RegisterController::class, "store"]);
 
 Route::post("like/{id}", LikeController::class)->name("like");
+
+Route::post("{movie_genre}", FilterController::class)->name("movie_genre");
+
