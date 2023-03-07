@@ -38,13 +38,15 @@
     @include("errors")
 </form>
 
+@if (isset($movies))
 @foreach ($movies as $movie)
 <form action="{{ route('movie_genre', ['movie_genre' => $movie->movie_genre]) }}" method="post" id="movie_genre">
 @endforeach
+@endif
 @csrf
 <label for="movie_genre">Show all movies from genre: </label><br>
     <select id="movie_genre" name="movie_genre" form="movie_genre">
-        <option value="comedy">All</option>
+        <option value="all">All</option>
         <option value="comedy">Comedy</option>
         <option value="drama">Drama</option>
         <option value="thriller">Thriller</option>
@@ -71,4 +73,8 @@
             </form>
         </div>
     @endforeach
+@endif
+
+@if (isset($movieByGenre))
+    <p> {{ $movieByGenre }} </p>
 @endif
