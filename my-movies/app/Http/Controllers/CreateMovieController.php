@@ -25,7 +25,7 @@ class CreateMovieController extends Controller
 
         Movie::create($attributes);
         
-        return view("dashboard");
+        return redirect("dashboard")->with("newMovieAdded", "Your fantastic movie idea has been added to the database!");
 
     }
 }

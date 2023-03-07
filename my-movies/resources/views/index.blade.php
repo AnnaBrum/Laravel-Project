@@ -16,4 +16,12 @@
 
 @include('errors')
 
-<a href="register">Register as new user</a>
+<a href="register">Register new user</a>
+
+@if (session("newUserGreeting"))
+    <p> {{ session("newUserGreeting") }} </p>
+@endif
+
+@if(session("loggedOut"))
+    <p> {{ session("loggedOut") }} </p>
+@endif
