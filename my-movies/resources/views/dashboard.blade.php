@@ -10,6 +10,10 @@
     <p> {{ session("newMovieAdded") }} </p>
 @endif
 
+@if(session("likeAdded"))
+    <p> {{ session("likeAdded") }} </p>
+@endif
+
 <br>
 <form action="createMovie" method="post" id="movieForm">
     @csrf
@@ -43,7 +47,8 @@
             <p>User Id: {{$movie->user_id}}</p>
             <p>Number of Likes: {{$movie->movie_likes}}</p>
 
-            <form action="like" method="post">
+            <form action="{{ route("like", ["id" => $movie->id]) }}" method="post">
+                @csrf
                 <button type="submit"><img src="{{ asset('images/ThumbsUp.svg') }}" alt="thumbs up"></button>
             </form>
         </div>

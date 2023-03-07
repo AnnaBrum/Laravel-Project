@@ -34,4 +34,4 @@ Route::get("/logout", LogoutController::class);
 Route::get("register", [RegisterController::class, "create"]);
 Route::post("register", [RegisterController::class, "store"]);
 
-Route::post("like", LikeController::class);
+Route::post("like/{id}", LikeController::class)->name("like");
