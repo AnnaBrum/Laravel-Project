@@ -40,7 +40,7 @@
 
 @if (isset($movies))
 @foreach ($movies as $movie)
-<form action="{{ route('movie_genre', ['movie_genre' => $movie->movie_genre]) }}" method="post" id="movie_genre">
+<form action="/movie_genre" method="post" id="movie_genre">
 @endforeach
 @endif
 @csrf
@@ -75,6 +75,7 @@
     @endforeach
 @endif
 
-@if (isset($movieByGenre))
-    <p> {{ $movieByGenre }} </p>
-@endif
+@isset($movie))
+    <p> {{ $movie->movie_title }} </p>
+@endisset
+

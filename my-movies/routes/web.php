@@ -38,5 +38,5 @@ Route::post("register", [RegisterController::class, "store"]);
 
 Route::post("like/{id}", LikeController::class)->name("like");
 
-Route::post("movie_genre/{movie_genre}", FilterController::class)->name("movie_genre");
+Route::post("movie_genre", FilterController::class)->name("movie_genre");
 

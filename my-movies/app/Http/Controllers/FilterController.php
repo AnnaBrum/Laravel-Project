@@ -11,12 +11,12 @@ class FilterController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request, $movie_genre)
+    public function __invoke(Request $request)
     {
+      
+        $movieByGenre = DB::table("movies")->where("movie_genre", "=", $request->movie_genre)->first();
 
-        $movieByGenre = DB::table("movies")
-        ->where("movie_genre", "=", $movie_genre)->get();
-        return view("dashboard", ["movie_genre" => $movie_genre, "movie" => $movieByGenre]);
+        return view("dashboard", ["movie_genre" => $request->movie_genre, "movie" => $movieByGenre]);
     }
 }
 
