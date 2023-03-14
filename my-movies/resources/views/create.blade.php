@@ -15,4 +15,8 @@
     @include("errors")
 </form>
 
+@if (isset($errorInfo))
+    <p>Whoops, something went wrong. Maybe the user name is already taken?</p>
+@endif
+
 <a href="/">Back</a>

@@ -28,7 +28,14 @@ class RegisterController extends Controller
 
         $attributes["password"] = bcrypt($attributes["password"]);
 
-        User::create($attributes);
+        try {
+            User::create($attributes);
+        } catch (\Illuminate\Database\QueryException $exception) {
+            $errorInfo = $exception->errorInfo;
+            
+            return view("create", ["errorInfo" => $errorInfo]);
+           
+        };
 
         return redirect("/")->with("newUserGreeting", "New user added!");
     }

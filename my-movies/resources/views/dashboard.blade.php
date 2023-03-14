@@ -14,6 +14,11 @@
     <p> {{ session("likeAdded") }} </p>
 @endif
 
+@if(session("test"))
+    <p> {{ session("test") }} </p>
+@endif
+
+
 <br>
 <form action="createMovie" method="post" id="movieForm">
     @csrf
