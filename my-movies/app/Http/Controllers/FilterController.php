@@ -16,13 +16,16 @@ class FilterController extends Controller
     public function __invoke(Request $request)
     {
         $user = Auth::user();
-        
+
         $movies = DB::table("movies")->where("movie_genre", "=", $request->movie_genre)->get();
- 
+
+        $noMovie = false;
+
         if ($movies->isEmpty()):
+            $noMovie = "Sorry, no movie in this genre was found, maybe add one yourself?";
             $movies = DB::table("movies")->get();
         endif;
 
-        return view("/dashboard", ["user" => $user, "movies" => $movies]);
+        return view("/dashboard", ["user" => $user, "movies" => $movies, "noMovie" => $noMovie]);
     }
 }

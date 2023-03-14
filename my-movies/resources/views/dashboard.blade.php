@@ -61,7 +61,9 @@
     <button type="submit">Show movies</button>
 </form>
 
-
+@if (isset($noMovie))
+    <p>{{ $noMovie }}</p>
+@endif
 
 @if (isset($movies))
     @foreach ($movies as $movie)
