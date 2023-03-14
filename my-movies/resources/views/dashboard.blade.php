@@ -75,7 +75,5 @@
     @endforeach
 @endif
 
-@isset($movie))
-    <p> {{ $movie->movie_title }} </p>
-@endisset
+
 

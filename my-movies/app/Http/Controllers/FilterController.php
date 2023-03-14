@@ -13,10 +13,11 @@ class FilterController extends Controller
      */
     public function __invoke(Request $request)
     {
-      
-        $movieByGenre = DB::table("movies")->where("movie_genre", "=", $request->movie_genre)->first();
 
-        return view("dashboard", ["movie_genre" => $request->movie_genre, "movie" => $movieByGenre]);
+        $movies = DB::table("movies")->where("movie_genre", "=", $request->movie_genre)->get();
+
+
+
+        return view("/dashboard", ["movies" => $movies]);
     }
 }
-
