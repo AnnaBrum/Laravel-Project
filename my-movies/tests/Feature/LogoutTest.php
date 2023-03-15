@@ -10,6 +10,7 @@ use Tests\TestCase;
 
 class LogoutTest extends TestCase
 {
+    use RefreshDatabase;
 
     public function test_logout(): void
     {

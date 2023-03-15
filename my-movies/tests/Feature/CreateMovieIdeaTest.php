@@ -19,20 +19,18 @@ class CreateMovieIdeaTest extends TestCase
         $user->password = Hash::make("1234567");
         $user->save();
 
-        $this
-            ->actingAs($user)
-            ->post(
-                "movies", [
-                "movie_title" => "Toy Story 324",
-                "movie_genre" => "action",
-                "movie_plot" => "Something something something"
-            ]);
-
-        $this->assertDatabaseHas(
-            "movies", [
+        $dbData = [
             "movie_title" => "Toy Story 324",
             "movie_genre" => "action",
             "movie_plot" => "Something something something"
-		]);
+        ];
+
+        $this
+            ->actingAs($user)
+            ->post(
+                "createMovie", $dbData);
+
+        $this->assertDatabaseHas(
+            "movies", $dbData);
     }
 }
