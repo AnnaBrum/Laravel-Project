@@ -47,7 +47,7 @@
 
 <hr>
 
-<h2>Check out our users' movie ideas below, and leave a like if you find an idea that you really like!</h2>
+<h2>Check out our users' movie ideas below, and leave a thumbs up if you find an idea that you really like!</h2>
 
 @if (isset($movies))
 @foreach ($movies as $movie)
