@@ -72,6 +72,10 @@
     <p>{{ $noMovie }}</p>
 @endif
 
+@if (isset($movieGenre))
+    <p> Showing {{ $movieGenre }} movie ideas </p>
+@endif
+
 <div class="movie-container">
     @if (isset($movies))
         @foreach ($movies as $movie)

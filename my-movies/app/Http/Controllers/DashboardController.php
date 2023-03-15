@@ -18,7 +18,7 @@ class DashboardController extends Controller
         $user = Auth::user();
         /* $movies = DB::table("movies")->get(); */
 
-        $movies = Movie::with("user")->get();
+        $movies = Movie::with("user")->get(); 
 
         return view("dashboard", ["user" => $user, "movies" => $movies]);
 
