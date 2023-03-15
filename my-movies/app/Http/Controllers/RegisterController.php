@@ -32,38 +32,12 @@ class RegisterController extends Controller
             User::create($attributes);
         } catch (\Illuminate\Database\QueryException $exception) {
             $errorInfo = $exception->errorInfo;
-            
+
             return view("create", ["errorInfo" => $errorInfo]);
-           
+
         };
 
         return redirect("/")->with("newUserGreeting", "New user added!");
     }
 }
 
-
-
-            // $this->validate($request, [
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users',
-        //     'password' => 'required|string|min:8|confirmed',
-        // ]);
-
-        // $user = $request->all(['name', 'email', 'password']);
-
-        // if ($validator->fails()) {
-        // return back()->withErrors([
-        //     'name' => 'Please enter a valid username',
-        //     'email' => 'Please enter a valid email',
-        //     'password' => 'Please enter a valid password',
-        // ])->onlyInput('name', 'email', 'password');
-
-
-
-        // $user = User::create([
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'password' => Hash::make($request->password),
-        // ]);
-
-        // return redirect("/login");

@@ -10,6 +10,7 @@ use Tests\TestCase;
 
 class LogoutTest extends TestCase
 {
+
     use RefreshDatabase;
 
     public function test_logout(): void
@@ -19,9 +20,16 @@ class LogoutTest extends TestCase
         $user->email = "runar@yrgo.se";
         $user->password = Hash::make("1234567");
         $user->save();
-        $this->be($user); // login
 
-        $this->get('/logout')
-            ->assertRedirect('/'); // redirect to login,
+        $response = $this
+            ->be($user)
+            ->followingRedirects()
+            ->get("/logout");
+
+        $response->assertSeeText("Email");
+        $response->assertStatus(200);
     }
 }
+
+
+
