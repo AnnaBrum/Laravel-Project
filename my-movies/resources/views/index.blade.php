@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 <form method="post" action="/login">
 @csrf

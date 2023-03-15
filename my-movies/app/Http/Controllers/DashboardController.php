@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Movie;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,9 @@ class DashboardController extends Controller
     public function __invoke(Request $request)
     {
         $user = Auth::user();
-        $movies = DB::table("movies")->get();
+        /* $movies = DB::table("movies")->get(); */
+
+        $movies = Movie::with("user")->get();
 
         return view("dashboard", ["user" => $user, "movies" => $movies]);
 

@@ -18,7 +18,7 @@ class LikeController extends Controller
             $movie->movie_likes += 1;
             $movie->save();
 
-            return redirect("dashboard")->with("likeAdded", "Like registered!");
+            return redirect("dashboard")->with("likeAdded", "Like added!");
         
     }
 }

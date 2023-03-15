@@ -17,13 +17,15 @@ class FilterController extends Controller
     {
         $user = Auth::user();
 
-        $movies = DB::table("movies")->where("movie_genre", "=", $request->movie_genre)->get();
+        /* $movies = DB::table("movies")->where("movie_genre", "=", $request->movie_genre)->get(); */
+        $movies = Movie::with("user")->where("movie_genre", "=", $request->movie_genre)->get();
 
         $noMovie = false;
 
         if ($movies->isEmpty()):
             $noMovie = "Sorry, no movie in this genre was found, maybe add one yourself?";
-            $movies = DB::table("movies")->get();
+            /* $movies = DB::table("movies")->get(); */
+            $movies = Movie::with("user")->get();
         endif;
 
         return view("/dashboard", ["user" => $user, "movies" => $movies, "noMovie" => $noMovie]);

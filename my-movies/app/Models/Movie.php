@@ -15,4 +15,9 @@ class Movie extends Model
         "movie_plot",
         "user_id",
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

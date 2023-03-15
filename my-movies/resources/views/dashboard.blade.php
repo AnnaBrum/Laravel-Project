@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-<a href="logout">Log out</a>
+<a href="logout">Sign out</a>
 
 @if (isset($user))
 <p>Signed in user: {{ $user->name }}</p>
@@ -18,8 +18,10 @@
     <p> {{ session("test") }} </p>
 @endif
 
+<hr>
 
-<br>
+<h2>Add your movie idea below</h2>
+
 <form action="createMovie" method="post" id="movieForm">
     @csrf
 
@@ -36,12 +38,16 @@
     </select><br><br>
 
     <label for="moviePlot">Plot:</label><br>
-    <textarea type="text" name="movie_plot" id="moviePlot" rows="20" cols="50"></textarea><br>
+    <textarea type="text" name="movie_plot" id="moviePlot" rows="5" cols="35"></textarea><br>
 
     <button type="submit">Submit</button>
 
     @include("errors")
 </form>
+
+<hr>
+
+<h2>Check out our users' movie ideas below, and leave a like if you find an idea that you really like!</h2>
 
 @if (isset($movies))
 @foreach ($movies as $movie)
@@ -49,7 +55,7 @@
 @endforeach
 @endif
 @csrf
-<label for="movie_genre">Show all movies from genre: </label><br>
+<label for="movie_genre">Sort movie ideas by genre:</label><br>
     <select id="movie_genre" name="movie_genre" form="movie_genre">
         <option value="all">All</option>
         <option value="comedy">Comedy</option>
@@ -58,6 +64,7 @@
         <option value="action">Action</option>
         <option value="horror">Horror</option>
     </select>
+    <br>
     <button type="submit">Show movies</button>
 </form>
 
@@ -65,22 +72,23 @@
     <p>{{ $noMovie }}</p>
 @endif
 
-@if (isset($movies))
-    @foreach ($movies as $movie)
-        <div class="movieBox">
-            <h2>Movie Title: {{ucfirst($movie->movie_title)}}</h2>
-            <p>Genre: {{ucfirst($movie->movie_genre)}}</p>
-            <p>Plot: {{$movie->movie_plot}}</p>
-            <p>User Id: {{$movie->user_id}}</p>
-            <p>Number of Likes: {{$movie->movie_likes}}</p>
+<div class="movie-container">
+    @if (isset($movies))
+        @foreach ($movies as $movie)
+            <div class="movieBox">
+                <h2>Movie Title: {{ucfirst($movie->movie_title)}}</h2>
+                <p>Genre: {{ucfirst($movie->movie_genre)}}</p>
+                <p>Plot: {{$movie->movie_plot}}</p>
+                <p>User: {{$movie->user->name}}</p>
+                <p>Number of Likes: {{$movie->movie_likes}}</p>
 
-            <form action="{{ route('like', ['id' => $movie->id]) }}" method="post">
-                @csrf
-                <button type="submit"><img src="{{ asset('images/ThumbsUp.svg') }}" alt="thumbs up"></button>
-            </form>
-        </div>
-    @endforeach
-@endif
-
+                <form action="{{ route('like', ['id' => $movie->id]) }}" method="post">
+                    @csrf
+                    <button type="submit"><img src="{{ asset('images/ThumbsUp.svg') }}" alt="thumbs up"></button>
+                </form>
+            </div>
+        @endforeach
+    @endif
+</div>
 
 
