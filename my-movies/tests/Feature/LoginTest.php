@@ -32,8 +32,9 @@ class LoginTest extends TestCase
                 "email" => "runar@yrgo.se",
                 "password" => "1234567",
             ]);
-
-        $response->assertSeeText("Signed in user: Harald");
+        
+        $response = $this->get("/dashboard");
+        $response->assertSeeText("Signed in user: Runar");
     }
 
     public function test_login_user_without_password()
