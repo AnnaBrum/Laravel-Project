@@ -1,6 +1,7 @@
 body {
     margin: 2rem;
     font-family: Helvetica, "Inter", sans-serif;
+    margin-bottom: 10rem;
 }
 
 .movie-container {
@@ -24,19 +25,23 @@ body {
 }
 
 .movieBox {
-    border: 1px solid black;
+    border: 1px solid lightgray;
     padding: 2rem;
     word-wrap: break-word;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;;
 }
 
 hr {
     margin: 2rem 0;
     border: none;
     height: 1px;
-    background-color: black;
+    background-color: lightgray;
     width: 100%;
 }
 
 button {
     cursor: pointer;
+    margin-top: 1rem;
 }
+

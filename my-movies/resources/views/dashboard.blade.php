@@ -1,10 +1,12 @@
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-<a href="logout">Sign out</a>
+<h1>Movie ideas database</h1>
 
 @if (isset($user))
 <p>Signed in user: {{ $user->name }}</p>
 @endif
+
+<a href="logout">Sign out</a>
 
 @if(session("newMovieAdded"))
     <p> {{ session("newMovieAdded") }} </p>

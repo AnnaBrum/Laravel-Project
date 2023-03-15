@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
+<h1>Movie ideas database</h1>
+
 <form method="post" action="/login">
 @csrf
 
