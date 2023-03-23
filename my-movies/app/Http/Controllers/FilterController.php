@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\Movie_genre;
 use Hamcrest\Core\IsSame;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,7 @@ class FilterController extends Controller
         $user = Auth::user();
 
 
-        $movies = Movie::with("user")->where("movie_genre", "=", $request->movie_genre)->get();
+        $movies = Movie_genre::with("user")->where("movie_genre", "=", $request->movie_genre)->get();
 
         $noMovie = false;
 

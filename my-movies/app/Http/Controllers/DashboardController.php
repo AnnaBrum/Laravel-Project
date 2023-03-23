@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\Genre;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,11 @@ class DashboardController extends Controller
         $user = Auth::user();
         /* $movies = DB::table("movies")->get(); */
 
-        $movies = Movie::with("user")->get(); 
+        $genres = Genre::all();
 
-        return view("dashboard", ["user" => $user, "movies" => $movies]);
+        $movies = Movie::with("user")->get();
+
+        return view("dashboard", ["user" => $user, "movies" => $movies, "genres" => $genres]);
 
     }
 
