@@ -34,11 +34,10 @@
 
     <label for="genreTitle">Genre:</label>
     @foreach($genres as $genre)
-    <input type="checkbox" name="<?= $genre->genre_title ?>">
-    <label for="<?= $genre->genre_title ?>">
-        <?= $genre->genre_title ?>
-    </label><br>
+        <input type="checkbox" name="movie_genre" value="<?= $genre->genre_title ?>" id="<?= $genre->genre_title ?>">
+        <label for="<?= $genre->genre_title ?>"><?= $genre->genre_title ?></label><br>
     @endforeach
+
     <!-- <label for="movieGenre">Genre:</label><br>
     <select id="genre" name="movie_genre" form="movieForm">
         <option value="comedy">Comedy</option>
