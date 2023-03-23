@@ -18,7 +18,7 @@ class CreateMovieController extends Controller
         $genres = DB::table('genres')->get();
 
         foreach ($genres as $genre) {
-            $movie_genre = $genre->genre;
+            $movie_genre = $genre->genre_title;
 
 
             if (isset($movie[$movie_genre])) {

@@ -33,11 +33,10 @@
     <input type="text" name="movie_title" id="movieTitle"><br><br>
 
     <label for="genreTitle">Genre:</label>
-
     @foreach($genres as $genre)
     <input type="checkbox" name="<?= $genre->genre_title ?>">
     <label for="<?= $genre->genre_title ?>">
-        <?= $genres->genre_title ?>
+        <?= $genre->genre_title ?>
     </label><br>
     @endforeach
     <!-- <label for="movieGenre">Genre:</label><br>
