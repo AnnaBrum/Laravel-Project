@@ -15,7 +15,7 @@ class CreateMovieController extends Controller
     {
         $attributes = request()->validate([
             "movie_title" => ["required", "max:255", "min:2"],
-            "movie_genre" => ["required"],
+            // "movie_genre" => ["required"],
             "movie_plot" => ["required", "max:255", "min:10"]
         ]);
 
@@ -24,7 +24,7 @@ class CreateMovieController extends Controller
         $attributes["user_id"] = $user_id;
 
         Movie::create($attributes);
-        
+
         return redirect("dashboard")->with("newMovieAdded", "Your fantastic movie idea has been added to the database!");
 
     }

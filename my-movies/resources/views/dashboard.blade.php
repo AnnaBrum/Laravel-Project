@@ -30,14 +30,18 @@
     <label for="movieTitle">Title:</label><br>
     <input type="text" name="movie_title" id="movieTitle"><br><br>
 
-    <label for="movieGenre">Genre:</label><br>
+    <label for="genreTitle">Genre:</label>
+    @foreach($genres as $genre)
+    <option value="<?= $genres->genre?>"><?= $genres->genre ?></option>
+    @endforeach
+    <!-- <label for="movieGenre">Genre:</label><br>
     <select id="genre" name="movie_genre" form="movieForm">
         <option value="comedy">Comedy</option>
         <option value="drama">Drama</option>
         <option value="thriller">Thriller</option>
         <option value="action">Action</option>
         <option value="horror">Horror</option>
-    </select><br><br>
+    </select><br><br> -->
 
     <label for="moviePlot">Plot:</label><br>
     <textarea type="text" name="movie_plot" id="moviePlot" rows="5" cols="35"></textarea><br>
@@ -57,7 +61,13 @@
 @endforeach
 @endif
 @csrf
-<label for="movie_genre">Sort movie ideas by genre:</label><br>
+
+<label for="movieGenre">Genre:</label>
+    @foreach($genres as $genre)
+    <option value="<?= $genres->genre?>"><?= $genres->genre ?></option>
+    @endforeach
+
+<!-- <label for="movie_genre">Sort movie ideas by genre:</label><br>
     <select id="movie_genre" name="movie_genre" form="movie_genre">
         <option value="all">All</option>
         <option value="comedy">Comedy</option>
@@ -65,7 +75,7 @@
         <option value="thriller">Thriller</option>
         <option value="action">Action</option>
         <option value="horror">Horror</option>
-    </select>
+    </select> -->
     <br>
     <button type="submit">Show movies</button>
 </form>
@@ -74,8 +84,8 @@
     <p>{{ $noMovie }}</p>
 @endif
 
-@if (isset($movieGenre))
-    <p> Showing {{ $movieGenre }} movie ideas </p>
+@if (isset($genre))
+    <p> Showing {{ $genre }} movie ideas </p>
 @endif
 
 <div class="movie-container">
@@ -83,7 +93,7 @@
         @foreach ($movies as $movie)
             <div class="movieBox">
                 <h2>Movie Title: {{ucfirst($movie->movie_title)}}</h2>
-                <p>Genre: {{ucfirst($movie->movie_genre)}}</p>
+                <p>Genre: {{ucfirst($genres->genre_title)}}</p>
                 <p>Plot: {{$movie->movie_plot}}</p>
                 <p>User: {{$movie->user->name}}</p>
                 <p>Number of Likes: {{$movie->movie_likes}}</p>
