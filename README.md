@@ -1,5 +1,5 @@
 # Laravel-Project
-Movie rating site built with Laravel
+An app where you can login, submit and rate movie-ideas.
 
 # Code-review
 - create.blade.php - could have a more descriptive name, prehaps createUser.
