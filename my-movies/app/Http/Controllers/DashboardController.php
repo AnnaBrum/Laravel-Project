@@ -20,7 +20,6 @@ class DashboardController extends Controller
         /* $movies = DB::table("movies")->get(); */
 
         $genres = Genre::all();
-
         $movies = Movie::with("user")->get();
 
         return view("dashboard", ["user" => $user, "movies" => $movies, "genres" => $genres]);

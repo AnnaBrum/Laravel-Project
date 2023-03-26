@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('movies_genres', function (Blueprint $table) {
             $table->id();
-            $table->integer('movie_id');
-            $table->integer('genre_id');
+            $table->foreign('movie_id')->references('id')->on('movies');
+            $table->foreign('genre_id')->references('id')->on('genres');
             $table->timestamps();
         });
     }

@@ -33,19 +33,12 @@
     <input type="text" name="movie_title" id="movieTitle"><br><br>
 
     <label for="genreTitle">Genre:</label>
+    <br>
     @foreach($genres as $genre)
-        <input type="checkbox" name="movie_genre" value="<?= $genre->genre_title ?>" id="<?= $genre->genre_title ?>">
+        <input type="checkbox" name="genre_title" value="<?= $genre->genre_title ?>" id="<?= $genre->genre_title ?>">
         <label for="<?= $genre->genre_title ?>"><?= $genre->genre_title ?></label><br>
     @endforeach
-
-    <!-- <label for="movieGenre">Genre:</label><br>
-    <select id="genre" name="movie_genre" form="movieForm">
-        <option value="comedy">Comedy</option>
-        <option value="drama">Drama</option>
-        <option value="thriller">Thriller</option>
-        <option value="action">Action</option>
-        <option value="horror">Horror</option>
-    </select><br><br> -->
+    <br>
 
     <label for="moviePlot">Plot:</label><br>
     <textarea type="text" name="movie_plot" id="moviePlot" rows="5" cols="35"></textarea><br>
@@ -62,7 +55,7 @@
 
 @if (isset($movies))
 @foreach ($movies as $movie)
-<form action="/genre_title" method="post" id="movie_genre">
+<form action="/genre_title" method="post" id="genre_title">
     @endforeach
     @endif
     @csrf
@@ -93,7 +86,7 @@
 @endif
 
 @if (isset($genre))
-<p> Showing {{ $genre }} movie ideas </p>
+<p> Showing {{ $genre->genre_title }} movie ideas </p>
 @endif
 
 <!------------- DISPLAY MOVIE IDEAS ------------------->
