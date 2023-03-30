@@ -19,7 +19,7 @@ class FilterController extends Controller
         $user = Auth::user();
 
 
-        $movies = Movie_genre::with("user")->where("genre_title", "=", $request->genre_id)->get();
+        $movies = Movie_genre::with("user")->where("genre_id", "=", $request->genre_id)->get();
 
         $noMovie = false;
 
@@ -27,7 +27,7 @@ class FilterController extends Controller
 
 
         if ($movies->isEmpty()) :
-            if ($request->movie_id != $movies = Movie::with("user")->get()) : 
+            if ($request->movie_id != $movies = Movie::with("user")->get()) :
                 $noMovie = "Sorry, no movie in this genre was found, maybe add one yourself?";
                 $movieGenre = "all";
             endif;

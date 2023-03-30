@@ -1,3 +1,7 @@
+<?php
+use Illuminate\Support\Facades\DB;
+?>
+
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 <h1>Movie ideas database</h1>
@@ -34,8 +38,10 @@
 
     <label for="genreTitle">Genre:</label>
     <br>
+
+
     @foreach($genres as $genre)
-        <input type="checkbox" name="genre_title" value="<?= $genre->genre_title ?>" id="<?= $genre->genre_title ?>">
+        <input type="checkbox" name="<?= $genre->genre_title ?>" value="<?= $genre->genre_title ?>" id="<?= $genre->genre_title ?>">
         <label for="<?= $genre->genre_title ?>"><?= $genre->genre_title ?></label><br>
     @endforeach
     <br>
@@ -60,23 +66,14 @@
     @endif
     @csrf
 
-
+    @if (isset($movies))
     @foreach($genres as $genre)
     <input type="checkbox" name="<?= $genre->genre_title ?>">
     <label for="<?= $genre->genre_title ?>">
         <?= $genre->genre_title ?>
     </label><br>
     @endforeach
-
-    <!-- <label for="movie_genre">Sort movie ideas by genre:</label><br>
-    <select id="movie_genre" name="movie_genre" form="movie_genre">
-        <option value="all">All</option>
-        <option value="comedy">Comedy</option>
-        <option value="drama">Drama</option>
-        <option value="thriller">Thriller</option>
-        <option value="action">Action</option>
-        <option value="horror">Horror</option>
-    </select> -->
+    @endif
     <br>
     <button type="submit">Show movies</button>
 </form>
