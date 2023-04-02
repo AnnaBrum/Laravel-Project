@@ -17,44 +17,39 @@ class CreateMovieController extends Controller
     {
 
         $user_id = Auth::user()->id;
+        $genres = DB::table("genres")->get();
 
-
-        $movie_attributes = request()->validate([
+        $this->validate($request, [
             "movie_title" => ["required", "max:255", "min:2"],
             "movie_plot" => ["required", "max:255", "min:10"]
         ]);
 
-        $genres = DB::table("genres")->get();
+        $movie_attributes = [ "movie_title", "movie_plot"];
+        foreach ($genres as $genre) {
+            $movie_attributes[] = $genre->genre_title;
+        }
+
+
+        $movie = $request->only($movie_attributes);
+
+        $movie["user_id"] = $user_id;
+
+        Movie::create($movie);
+
         $movie_id = DB::table("movies")->latest()->value('id');
-
-        Movie::create($movie_attributes);
-        $movie_attributes["user_id"] = $user_id;
-
-
-
 
         foreach ($genres as $genre) {
 
-            $genre_title = $request->input("genre_title");
+            $genre_title = $genre->genre_title;
 
-            if (isset($movie_id[$genre_title])) {
-                $genre_id = $genre->id;
+            if (isset($movie[$genre_title])) {
+
                 Movie_genre::create([
                     "movie_id" => $movie_id,
-                    "genre_id" => $genre_id]);
+                    "genre_id" => $genre->id]);
             }
 
         }
-
-        // $movie_genre_attributes = request()->validate([
-        //     "movie_id" => $movie->id,
-        //     "genre_id" => $genre->id
-        // ]);
-
-
-
-
-        // Movie_genre::create($movie_genre_attributes);
 
         return redirect("dashboard")->with("newMovieAdded", "Your fantastic movie idea has been added to the database!");
 

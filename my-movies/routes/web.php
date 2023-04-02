@@ -38,5 +38,5 @@ Route::post("register", [RegisterController::class, "store"]);
 
 Route::post("like/{id}", LikeController::class)->name("like");
 
-Route::get("genre_title", FilterController::class)->name("genre_title");
+Route::post("genre_title", FilterController::class)->name("genre_title");
 

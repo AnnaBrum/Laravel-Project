@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use App\Models\Genre;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+
 
 class DashboardController extends Controller
 {
@@ -17,10 +16,19 @@ class DashboardController extends Controller
     public function __invoke(Request $request)
     {
         $user = Auth::user();
-        /* $movies = DB::table("movies")->get(); */
 
         $genres = Genre::all();
+
+        foreach ($genres as $genre) {
+            $genre_id = $genre->id;
+        }
+
         $movies = Movie::with("user")->get();
+
+        foreach ($movies as $movie) {
+            $movie_id = $movie->id;
+        }
+
 
         return view("dashboard", ["user" => $user, "movies" => $movies, "genres" => $genres]);
 

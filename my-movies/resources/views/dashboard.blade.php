@@ -63,7 +63,7 @@ use Illuminate\Support\Facades\DB;
 
 @if (isset($movies))
 @foreach ($movies as $movie)
-<form action="/genre_title" method="get" id="genre_title">
+<form action="/genre_title" method="post" id="genre_title">
     @endforeach
     @endif
     @csrf
