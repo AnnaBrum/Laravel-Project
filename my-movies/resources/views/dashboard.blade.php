@@ -97,7 +97,7 @@ use Illuminate\Support\Facades\DB;
         <h2>Movie Title: {{ucfirst($movie->movie_title)}}</h2>
         <p>Genre: {{ucfirst($genre->genre_title)}}</p>
 
-        {{die(var_dump($movie->movie_genres))}}
+        {{dd($genres[1])}}
 
         <p>Genre: {{$movie->genre_movie->genre_id}}
         <p>Plot: {{$movie->movie_plot}}</p>
