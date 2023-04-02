@@ -19,5 +19,4 @@ class Movie_genre extends Model
 
     ];
 
-    protected $table = 'movies_genres';
 }
