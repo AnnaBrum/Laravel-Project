@@ -39,11 +39,12 @@ use Illuminate\Support\Facades\DB;
     <label for="genreTitle">Genre:</label>
     <br>
 
-
+@if (isset($genres))
     @foreach($genres as $genre)
         <input type="checkbox" name="<?= $genre->genre_title ?>" value="<?= $genre->genre_title ?>" id="<?= $genre->genre_title ?>">
         <label for="<?= $genre->genre_title ?>"><?= $genre->genre_title ?></label><br>
     @endforeach
+    @endif
     <br>
 
     <label for="moviePlot">Plot:</label><br>
@@ -55,18 +56,19 @@ use Illuminate\Support\Facades\DB;
 </form>
 <hr>
 
+
 <!------------- CHOOSE GENRE TO DISPLAY MOVIES ------------------->
 
 <h2>Check out our users' movie ideas below, and leave a thumbs up if you find an idea that you really like!</h2>
 
 @if (isset($movies))
 @foreach ($movies as $movie)
-<form action="/genre_title" method="post" id="genre_title">
+<form action="/genre_title" method="get" id="genre_title">
     @endforeach
     @endif
     @csrf
 
-    @if (isset($movies))
+    @if (isset($genres))
     @foreach($genres as $genre)
     <input type="checkbox" name="<?= $genre->genre_title ?>">
     <label for="<?= $genre->genre_title ?>">
@@ -89,7 +91,7 @@ use Illuminate\Support\Facades\DB;
 <!------------- DISPLAY MOVIE IDEAS ------------------->
 
 <div class="movie-container">
-    @if (isset($movies))
+    @if (isset($movies) && isset($genres))
     @foreach ($movies as $movie)
     <div class="movieBox">
         <h2>Movie Title: {{ucfirst($movie->movie_title)}}</h2>
