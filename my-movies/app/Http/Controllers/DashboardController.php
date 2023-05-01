@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use App\Models\Genre;
+use App\Models\Movie_genre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,13 +19,14 @@ class DashboardController extends Controller
         $user = Auth::user();
         $genres = Genre::all();
         $movies = Movie::with("user")->get();
+        $movie_genres = Movie_genre::with("genre")->get();
 
         $selectedGenre = $request->get("genre_title");
         if ($selectedGenre) {
             $movies = $genres->where("genre_title", $selectedGenre)->first()->movies;
-        };
+        }; 
 
-        return view("dashboard", ["user" => $user, "movies" => $movies, "genres" => $genres ]);
+        return view("dashboard", ["user" => $user, "movies" => $movies, "genres" => $genres, "movie_genres" => $movie_genres]);
 
     }
 

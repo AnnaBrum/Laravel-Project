@@ -18,6 +18,7 @@ class FilterController extends Controller
     {
         $user = Auth::user();
 
+        /* $filteredGenres = $request->input("genres"); */
 
         $movies = Movie_genre::with("user")->where("genre_id", "=", $request->genre_id)->get();
 
