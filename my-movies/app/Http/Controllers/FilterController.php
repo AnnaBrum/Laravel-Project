@@ -18,7 +18,7 @@ class FilterController extends Controller
     {
         $user = Auth::user();
 
-        /* $filteredGenres = $request->input("genres"); */
+        $filteredGenres = $request->input("genre");
 
         $movies = Movie_genre::with("user")->where("genre_id", "=", $request->genre_id)->get();
 
@@ -35,6 +35,6 @@ class FilterController extends Controller
 
         endif;
 
-        return view("/dashboard", ["user" => $user, "movies" => $movies, "noMovie" => $noMovie, "movieGenre" => $movieGenre]);
+        return view("/dashboard", ["user" => $user, "movies" => $movies, "noMovie" => $noMovie, "movieGenre" => $movieGenre, "filteredGenres" => $filteredGenres]);
     }
 }

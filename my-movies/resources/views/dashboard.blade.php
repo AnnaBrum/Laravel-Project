@@ -71,7 +71,7 @@ use Illuminate\Support\Facades\DB;
 
     @if (isset($genres))
     @foreach($genres as $genre)
-    <input type="checkbox" value="<?= $genre->genre_id ?>" name="genre[]">
+    <input type="checkbox" value="<?= $genre->id ?>" name="genre[]">
     <label for="<?= $genre->genre_title ?>">
         <?= $genre->genre_title ?>
     </label><br>
@@ -90,6 +90,36 @@ use Illuminate\Support\Facades\DB;
 @endif
 
 <!------------- DISPLAY MOVIE IDEAS ------------------->
+@if (isset($filteredGenres))
+    <div class="movie-container">
+        @foreach ($filteredGenres as $genreId)
+            @foreach ($movies as $movie)
+                @foreach ($movie->movie_genres as $movie_genre)
+                    @if ($movie_genre->genre_id == $genreId)
+                        <div class="movieBox">
+                            <h2>Movie Title: {{ucfirst($movie->movie_title)}}</h2>
+                            <p>Genre: 
+                                @foreach ($movie->movie_genres as $movie_genre)
+                                    @if ($movie_genre->genre_id === $movie_genre->genre->id)
+                                        {{ucfirst($movie_genre->genre->genre_title . ", ")}}
+                                    @endif
+                                @endforeach
+                            </p>
+                            <p>Plot: {{ucfirst($movie->movie_plot)}}</p>
+                            <p>User: {{$movie->user->name}}</p>
+                            <p>Number of Likes: {{$movie->movie_likes}}</p>
+            
+                            <form action="{{ route('like', ['id' => $movie->id]) }}" method="post">
+                                @csrf
+                                <button type="submit"><img src="{{ asset('images/ThumbsUp.svg') }}" alt="thumbs up"></button>
+                            </form>
+                        </div>
+                    @endif
+                @endforeach 
+            @endforeach
+        @endforeach
+    </div>
+@endif
 
 <div class="movie-container">
     @if (isset($movies) && isset($genres))
