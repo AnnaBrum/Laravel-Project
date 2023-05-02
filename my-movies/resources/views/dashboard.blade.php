@@ -91,11 +91,16 @@ use Illuminate\Support\Facades\DB;
 
 <!------------- DISPLAY MOVIE IDEAS ------------------->
 @if (isset($filteredGenres))
+    <?php $alreadyPosted = []; ?>
     <div class="movie-container">
         @foreach ($filteredGenres as $genreId)
             @foreach ($movies as $movie)
                 @foreach ($movie->movie_genres as $movie_genre)
                     @if ($movie_genre->genre_id == $genreId)
+                        @if (in_array($movie->id, $alreadyPosted))
+                            <?php continue; ?>
+                        @endif
+                        <?php array_push($alreadyPosted, $movie->id) ?>
                         <div class="movieBox">
                             <h2>Movie Title: {{ucfirst($movie->movie_title)}}</h2>
                             <p>Genre: 
