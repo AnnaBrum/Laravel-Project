@@ -85,8 +85,14 @@ use Illuminate\Support\Facades\DB;
 <p>{{ $noMovie }}</p>
 @endif
 
-@if (isset($genre))
-<p> Showing {{ $genre->genre_title }} movie ideas </p>
+@if (isset($movieGenre) && is_array($movieGenre))
+    <p>Showing
+    @foreach ($movieGenre as $singleGenre) 
+        <span><?= $singleGenre ?>, </span>
+    @endforeach
+    movie ideas</p>
+@elseif (isset($movieGenre))
+    <p> Showing {{ $movieGenre }} movie ideas </p>
 @endif
 
 <!------------- DISPLAY MOVIE IDEAS ------------------->
@@ -124,8 +130,7 @@ use Illuminate\Support\Facades\DB;
             @endforeach
         @endforeach
     </div>
-@endif
-
+@elseif (!isset($filteredGenres))
 <div class="movie-container">
     @if (isset($movies) && isset($genres))
         @foreach ($movies as $movie)
@@ -149,3 +154,4 @@ use Illuminate\Support\Facades\DB;
             </div>
         @endforeach
     @endif
+@endif

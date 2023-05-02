@@ -8,6 +8,7 @@ use Hamcrest\Core\IsSame;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Genre;
 
 class FilterController extends Controller
 {
@@ -20,21 +21,33 @@ class FilterController extends Controller
 
         $filteredGenres = $request->input("genre");
 
-        $movies = Movie_genre::with("user")->where("genre_id", "=", $request->genre_id)->get();
+        $moviesExist = Movie_genre::where("genre_id", "=", $filteredGenres)->exists();
 
         $noMovie = false;
 
-        $movieGenre = $request->genre_id;
+        $request->validate([
+            'genre' => ['required'],
+        ]);
 
+        $genresArr = [];
+        foreach ($filteredGenres as $filteredGenre) :
+            $genresByName = Genre::where("id", "=", $filteredGenre)->get();
+            foreach ($genresByName as $genreByName) :
+                array_push($genresArr, $genreByName->genre_title);
+            endforeach;
+        endforeach;
 
-        if ($movies->isEmpty()) :
-            if ($request->movie_id != $movies = Movie::with("user")->get()) :
-                $noMovie = "Sorry, no movie in this genre was found, maybe add one yourself?";
-                $movieGenre = "all";
-            endif;
+        $movieGenre = $genresArr;
 
+        if (!$moviesExist) :
+            $noMovie = "Sorry, no movie in this genre was found, maybe add one yourself?";
+            $movieGenre = "all";
+            $filteredGenres = null;
         endif;
 
-        return view("/dashboard", ["user" => $user, "movies" => $movies, "noMovie" => $noMovie, "movieGenre" => $movieGenre, "filteredGenres" => $filteredGenres]);
+        $movies = Movie::with("user")->get();
+        $genres = Genre::all();
+
+        return view("/dashboard", ["genres" => $genres, "user" => $user, "movies" => $movies, "noMovie" => $noMovie, "movieGenre" => $movieGenre, "filteredGenres" => $filteredGenres]);
     }
 }
