@@ -1,3 +1,5 @@
+![jerry seinfeld eating popcorn](https://media.giphy.com/media/Bi6FcO7UoutWM/giphy.gif)
+
 # Laravel-Project
 An app where you can login, submit and rate movie-ideas.
 
