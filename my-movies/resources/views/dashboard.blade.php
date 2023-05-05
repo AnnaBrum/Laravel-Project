@@ -88,6 +88,10 @@ use Illuminate\Support\Facades\DB;
 @if (isset($movieGenre) && is_array($movieGenre))
     <p>Showing
     @foreach ($movieGenre as $singleGenre) 
+        @if (!next($movieGenre))
+            <span>and <?= $singleGenre ?> </span>
+            <?php continue; ?>
+        @endif
         <span><?= $singleGenre ?>, </span>
     @endforeach
     movie ideas</p>

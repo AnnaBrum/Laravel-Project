@@ -20,13 +20,14 @@ class DashboardController extends Controller
         $genres = Genre::all();
         $movies = Movie::with("user")->get();
         $movie_genres = Movie_genre::with("genre")->get();
+        $movieGenre = "all";
 
         $selectedGenre = $request->get("genre_title");
         if ($selectedGenre) {
             $movies = $genres->where("genre_title", $selectedGenre)->first()->movies;
         }; 
 
-        return view("dashboard", ["user" => $user, "movies" => $movies, "genres" => $genres, "movie_genres" => $movie_genres]);
+        return view("dashboard", ["user" => $user, "movies" => $movies, "genres" => $genres, "movie_genres" => $movie_genres, "movieGenre" => $movieGenre]);
 
     }
 
