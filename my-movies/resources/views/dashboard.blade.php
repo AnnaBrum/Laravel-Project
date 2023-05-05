@@ -85,12 +85,19 @@ use Illuminate\Support\Facades\DB;
 <p>{{ $noMovie }}</p>
 @endif
 
+<!-- To make filter-feedback-sentence readable with commas and "ands" -->
 @if (isset($movieGenre) && is_array($movieGenre))
     <p>Showing
-    @foreach ($movieGenre as $singleGenre) 
-        @if (!next($movieGenre))
+    @foreach ($movieGenre as $singleGenre)
+<!-- If on the last array-element and length of array is >= 2, add an "and" before last element. If on the next to last element, skip ",". -->
+        @if (!next($movieGenre) && count($movieGenre)>=2 )
             <span>and <?= $singleGenre ?> </span>
             <?php continue; ?>
+        @endif
+        @if ($movieGenre[count($movieGenre)-2] === $singleGenre)
+        <?php $nextToLast = count($movieGenre)-2; ?>
+        <span><?= $singleGenre ?> </span>
+        <?php continue; ?>
         @endif
         <span><?= $singleGenre ?>, </span>
     @endforeach
@@ -113,7 +120,7 @@ use Illuminate\Support\Facades\DB;
                         <?php array_push($alreadyPosted, $movie->id) ?>
                         <div class="movieBox">
                             <h2>Movie Title: {{ucfirst($movie->movie_title)}}</h2>
-                            <p>Genre: 
+                            <p>Genre:
                                 @foreach ($movie->movie_genres as $movie_genre)
                                     @if ($movie_genre->genre_id === $movie_genre->genre->id)
                                         {{ucfirst($movie_genre->genre->genre_title . ", ")}}
@@ -123,14 +130,14 @@ use Illuminate\Support\Facades\DB;
                             <p>Plot: {{ucfirst($movie->movie_plot)}}</p>
                             <p>User: {{$movie->user->name}}</p>
                             <p>Number of Likes: {{$movie->movie_likes}}</p>
-            
+
                             <form action="{{ route('like', ['id' => $movie->id]) }}" method="post">
                                 @csrf
                                 <button type="submit"><img src="{{ asset('images/ThumbsUp.svg') }}" alt="thumbs up"></button>
                             </form>
                         </div>
                     @endif
-                @endforeach 
+                @endforeach
             @endforeach
         @endforeach
     </div>
@@ -140,7 +147,7 @@ use Illuminate\Support\Facades\DB;
         @foreach ($movies as $movie)
             <div class="movieBox">
                 <h2>Movie Title: {{ucfirst($movie->movie_title)}}</h2>
-                <p>Genre: 
+                <p>Genre:
                     @foreach ($movie->movie_genres as $movie_genre)
                         @if ($movie_genre->genre_id === $movie_genre->genre->id)
                             {{ucfirst($movie_genre->genre->genre_title . ", ")}}
