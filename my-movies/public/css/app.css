@@ -1,7 +1,60 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
 body {
-    margin: 2rem;
+    width: 100vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
     font-family: Helvetica, "Inter", sans-serif;
     margin-bottom: 10rem;
+    background-color: rgb(255, 253, 239);;
+}
+
+header {
+    border-bottom: 2px solid rgb(255, 83, 35);
+    width: fit-content;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-size: 5rem;
+    color:rgb(255, 83, 35);
+}
+
+.login-wrapper {
+    border: 2px solid rgb(255, 83, 35);
+    background-color: rgb(255, 213, 201);
+    padding: 4rem;
+    margin: 4rem;
+}
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input {
+    align-self: end;
+    margin: .5rem;
+}
+
+.user-info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.create-movie {
+    display: flex;
+    flex-direction: column;
 }
 
 .movie-container {
@@ -32,15 +85,20 @@ body {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;;
 }
 
-hr {
+/* hr {
     margin: 2rem 0;
     border: none;
     height: 1px;
     background-color: lightgray;
     width: 100%;
-}
+} */
 
 button {
+    border: 2px solid rgb(255, 83, 35);;
+    width: 100%;
+    background: none;
+    padding: 1rem;
+    border-radius: 40px;
     cursor: pointer;
     margin-top: 1rem;
 }
