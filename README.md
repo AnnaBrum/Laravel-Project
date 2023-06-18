@@ -1,4 +1,6 @@
-# Laravel-Project
+![jerry seinfeld eating popcorn](https://media.giphy.com/media/Bi6FcO7UoutWM/giphy.gif)
+
+# MOVIE - IDEA - DATABASE
 An app where you can login, submit and rate movie-ideas.
 
 # Code-review
